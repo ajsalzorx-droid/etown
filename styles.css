@@ -639,6 +639,39 @@ textarea {
   text-decoration: none;
 }
 
+.floating-whatsapp {
+  position: fixed;
+  right: clamp(16px, 3vw, 34px);
+  bottom: clamp(16px, 3vw, 34px);
+  z-index: 30;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.26);
+  border-radius: 999px;
+  padding: 10px 16px 10px 10px;
+  background: #25d366;
+  color: #06130b;
+  text-decoration: none;
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.38);
+}
+
+.floating-whatsapp span {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border-radius: 50%;
+  background: #06130b;
+  color: #25d366;
+  font-size: 0.76rem;
+  font-weight: 900;
+}
+
+.floating-whatsapp strong {
+  font-size: 0.95rem;
+}
+
 @media (max-width: 920px) {
   .menu-board,
   .visit-details {
@@ -716,5 +749,15 @@ textarea {
 @media (max-width: 480px) {
   .menu-board {
     grid-template-columns: 1fr;
+  }
+
+  .floating-whatsapp {
+    right: 16px;
+    bottom: 16px;
+    padding: 10px;
+  }
+
+  .floating-whatsapp strong {
+    display: none;
   }
 }
