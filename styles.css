@@ -51,7 +51,10 @@ img {
   gap: 24px;
   padding: 18px clamp(18px, 5vw, 64px);
   color: #fff;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.62), rgba(0, 0, 0, 0));
+  border-bottom: 1px solid rgba(255, 195, 19, 0.28);
+  background: rgba(5, 5, 5, 0.92);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.34);
+  backdrop-filter: blur(14px);
 }
 
 .brand {
