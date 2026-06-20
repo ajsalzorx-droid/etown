@@ -3,6 +3,8 @@ const siteNav = document.querySelector(".site-nav");
 const reservationForm = document.querySelector(".reservation-form");
 const formStatus = document.querySelector(".form-status");
 const dateInput = document.querySelector('input[type="date"]');
+const heroSlides = Array.from(document.querySelectorAll(".hero-slide"));
+const heroDots = Array.from(document.querySelectorAll(".hero-dots span"));
 
 if (dateInput) {
   dateInput.min = new Date().toISOString().slice(0, 10);
@@ -19,6 +21,18 @@ siteNav?.addEventListener("click", (event) => {
     navToggle?.setAttribute("aria-expanded", "false");
   }
 });
+
+if (heroSlides.length > 1 && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  let activeSlide = 0;
+
+  window.setInterval(() => {
+    heroSlides[activeSlide].classList.remove("is-active");
+    heroDots[activeSlide]?.classList.remove("is-active");
+    activeSlide = (activeSlide + 1) % heroSlides.length;
+    heroSlides[activeSlide].classList.add("is-active");
+    heroDots[activeSlide]?.classList.add("is-active");
+  }, 4200);
+}
 
 reservationForm?.addEventListener("submit", (event) => {
   event.preventDefault();
