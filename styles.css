@@ -647,32 +647,27 @@ textarea {
   right: clamp(16px, 3vw, 34px);
   bottom: clamp(16px, 3vw, 34px);
   z-index: 30;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
+  display: grid;
+  width: 58px;
+  height: 58px;
+  place-items: center;
   border: 1px solid rgba(255, 255, 255, 0.26);
-  border-radius: 999px;
-  padding: 10px 16px 10px 10px;
+  border-radius: 50%;
+  padding: 0;
   background: #25d366;
   color: #06130b;
   text-decoration: none;
   box-shadow: 0 16px 34px rgba(0, 0, 0, 0.38);
 }
 
-.floating-whatsapp span {
-  display: grid;
-  width: 38px;
-  height: 38px;
-  place-items: center;
-  border-radius: 50%;
-  background: #06130b;
-  color: #25d366;
-  font-size: 0.76rem;
-  font-weight: 900;
-}
-
-.floating-whatsapp strong {
-  font-size: 0.95rem;
+.floating-whatsapp svg {
+  width: 32px;
+  height: 32px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
 }
 
 @media (max-width: 920px) {
@@ -757,10 +752,7 @@ textarea {
   .floating-whatsapp {
     right: 16px;
     bottom: 16px;
-    padding: 10px;
-  }
-
-  .floating-whatsapp strong {
-    display: none;
+    width: 54px;
+    height: 54px;
   }
 }
