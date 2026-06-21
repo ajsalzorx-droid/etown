@@ -308,6 +308,7 @@ h3 {
   box-shadow: 0 24px 70px rgba(0, 0, 0, 0.48);
   backdrop-filter: blur(14px);
   transform: translateY(-50%);
+  animation: offerPopupIn 520ms ease both;
 }
 
 .offer-popup[hidden] {
@@ -350,6 +351,18 @@ h3 {
 
 .offer-popup-actions .button {
   flex: 1 1 140px;
+}
+
+@keyframes offerPopupIn {
+  from {
+    opacity: 0;
+    transform: translate(24px, -50%) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(0, -50%) scale(1);
+  }
 }
 
 .section,
@@ -973,6 +986,7 @@ textarea {
     bottom: 22px;
     width: min(520px, calc(100% - 36px));
     transform: translateX(50%);
+    animation-name: offerPopupMobileIn;
   }
 }
 
@@ -1048,6 +1062,24 @@ textarea {
   .admin-hero {
     align-items: flex-start;
     flex-direction: column;
+  }
+}
+
+@keyframes offerPopupMobileIn {
+  from {
+    opacity: 0;
+    transform: translate(50%, 24px) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(50%, 0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .offer-popup {
+    animation: none;
   }
 }
 
