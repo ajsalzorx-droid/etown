@@ -862,8 +862,17 @@ textarea {
 }
 
 .admin-login[hidden],
+.admin-header[hidden],
 .admin-shell[hidden] {
   display: none;
+}
+
+.admin-header-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
 }
 
 .admin-login-card {

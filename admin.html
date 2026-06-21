@@ -23,12 +23,12 @@
           Password
           <input type="password" name="adminPassword" placeholder="Admin password" autocomplete="current-password" required />
         </label>
-        <button class="button primary" type="submit">Open Dashboard</button>
+        <button class="button primary" type="submit">Login</button>
         <p class="admin-login-error" data-admin-login-error role="alert"></p>
       </form>
     </section>
 
-    <header class="admin-header">
+    <header class="admin-header" data-admin-header hidden>
       <a class="brand" href="index.html" aria-label="Back to E-TOWN website">
         <img class="brand-logo" src="assets/etown-logo-web.jpg" alt="E-TOWN Resto Lounge logo" />
         <span>
@@ -36,7 +36,10 @@
           <small>Booking Admin</small>
         </span>
       </a>
-      <a class="button secondary" href="index.html">View Website</a>
+      <div class="admin-header-actions">
+        <a class="button secondary" href="index.html">View Website</a>
+        <button class="button dark" type="button" data-admin-logout>Logout</button>
+      </div>
     </header>
 
     <main class="admin-shell" data-admin-dashboard hidden>
