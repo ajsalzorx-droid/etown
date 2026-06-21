@@ -748,6 +748,12 @@ textarea {
   color: var(--muted);
 }
 
+.admin-source {
+  margin: 12px 0 0;
+  color: var(--gold);
+  font-weight: 800;
+}
+
 .admin-actions,
 .admin-toolbar {
   display: flex;

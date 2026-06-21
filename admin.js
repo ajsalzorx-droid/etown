@@ -1,13 +1,21 @@
-const BOOKINGS_KEY = "etownBookings";
 const bookingsTable = document.querySelector("[data-bookings]");
 const emptyState = document.querySelector("[data-empty]");
 const searchInput = document.querySelector("[data-search]");
 const filterInput = document.querySelector("[data-filter]");
 const exportButton = document.querySelector("[data-export]");
 const clearButton = document.querySelector("[data-clear]");
+const sourceLabel = document.querySelector("[data-source]");
 
-const getBookings = () => JSON.parse(localStorage.getItem(BOOKINGS_KEY) || "[]");
-const setBookings = (bookings) => localStorage.setItem(BOOKINGS_KEY, JSON.stringify(bookings));
+let allBookings = [];
+let activeSource = "Supabase";
+
+const escapeHtml = (value) =>
+  String(value || "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
 
 const formatDate = (value) => {
   if (!value) return "-";
@@ -18,18 +26,22 @@ const formatDate = (value) => {
   });
 };
 
-const updateStats = (bookings) => {
-  document.querySelector('[data-stat="total"]').textContent = bookings.length;
-  document.querySelector('[data-stat="new"]').textContent = bookings.filter((booking) => booking.status === "New").length;
-  document.querySelector('[data-stat="confirmed"]').textContent = bookings.filter((booking) => booking.status === "Confirmed").length;
-  document.querySelector('[data-stat="cancelled"]').textContent = bookings.filter((booking) => booking.status === "Cancelled").length;
+const updateSource = () => {
+  sourceLabel.textContent = `Data source: ${activeSource}`;
+};
+
+const updateStats = () => {
+  document.querySelector('[data-stat="total"]').textContent = allBookings.length;
+  document.querySelector('[data-stat="new"]').textContent = allBookings.filter((booking) => booking.status === "New").length;
+  document.querySelector('[data-stat="confirmed"]').textContent = allBookings.filter((booking) => booking.status === "Confirmed").length;
+  document.querySelector('[data-stat="cancelled"]').textContent = allBookings.filter((booking) => booking.status === "Cancelled").length;
 };
 
 const getVisibleBookings = () => {
   const query = searchInput.value.trim().toLowerCase();
   const status = filterInput.value;
 
-  return getBookings().filter((booking) => {
+  return allBookings.filter((booking) => {
     const matchesStatus = status === "All" || booking.status === status;
     const matchesSearch = `${booking.name} ${booking.phone}`.toLowerCase().includes(query);
     return matchesStatus && matchesSearch;
@@ -37,9 +49,9 @@ const getVisibleBookings = () => {
 };
 
 const renderBookings = () => {
-  const allBookings = getBookings();
   const bookings = getVisibleBookings();
-  updateStats(allBookings);
+  updateStats();
+  updateSource();
   emptyState.hidden = bookings.length > 0;
 
   bookingsTable.innerHTML = bookings
@@ -47,44 +59,53 @@ const renderBookings = () => {
       (booking) => `
         <tr>
           <td>
-            <strong>${booking.name || "-"}</strong>
-            <small>${booking.id}</small>
+            <strong>${escapeHtml(booking.name) || "-"}</strong>
+            <small>${escapeHtml(booking.id)}</small>
           </td>
-          <td><a href="tel:${booking.phone}">${booking.phone || "-"}</a></td>
+          <td><a href="tel:${escapeHtml(booking.phone)}">${escapeHtml(booking.phone) || "-"}</a></td>
           <td>${formatDate(booking.date)}</td>
-          <td>${booking.time || "-"}</td>
-          <td>${booking.guests || "-"}</td>
+          <td>${escapeHtml(booking.time) || "-"}</td>
+          <td>${escapeHtml(booking.guests) || "-"}</td>
           <td>
-            <select data-status="${booking.id}">
+            <select data-status="${escapeHtml(booking.id)}">
               <option value="New" ${booking.status === "New" ? "selected" : ""}>New</option>
               <option value="Confirmed" ${booking.status === "Confirmed" ? "selected" : ""}>Confirmed</option>
               <option value="Cancelled" ${booking.status === "Cancelled" ? "selected" : ""}>Cancelled</option>
             </select>
           </td>
-          <td>${booking.notes || "-"}</td>
-          <td><button class="table-action" type="button" data-delete="${booking.id}">Delete</button></td>
+          <td>${escapeHtml(booking.notes) || "-"}</td>
+          <td><button class="table-action" type="button" data-delete="${escapeHtml(booking.id)}">Delete</button></td>
         </tr>
       `
     )
     .join("");
 };
 
-bookingsTable.addEventListener("change", (event) => {
+const loadBookings = async () => {
+  sourceLabel.textContent = "Loading bookings...";
+  const result = await window.EtownBookings.listBookings();
+  allBookings = result.bookings;
+  activeSource = result.source;
+  renderBookings();
+};
+
+bookingsTable.addEventListener("change", async (event) => {
   const statusSelect = event.target.closest("[data-status]");
   if (!statusSelect) return;
 
-  const bookings = getBookings().map((booking) =>
+  activeSource = await window.EtownBookings.updateBookingStatus(statusSelect.dataset.status, statusSelect.value);
+  allBookings = allBookings.map((booking) =>
     booking.id === statusSelect.dataset.status ? { ...booking, status: statusSelect.value } : booking
   );
-  setBookings(bookings);
   renderBookings();
 });
 
-bookingsTable.addEventListener("click", (event) => {
+bookingsTable.addEventListener("click", async (event) => {
   const deleteButton = event.target.closest("[data-delete]");
   if (!deleteButton) return;
 
-  setBookings(getBookings().filter((booking) => booking.id !== deleteButton.dataset.delete));
+  activeSource = await window.EtownBookings.deleteBooking(deleteButton.dataset.delete);
+  allBookings = allBookings.filter((booking) => booking.id !== deleteButton.dataset.delete);
   renderBookings();
 });
 
@@ -93,7 +114,7 @@ filterInput.addEventListener("change", renderBookings);
 
 exportButton.addEventListener("click", () => {
   const rows = [["ID", "Name", "Phone", "Date", "Time", "Guests", "Status", "Notes"]];
-  getBookings().forEach((booking) => {
+  allBookings.forEach((booking) => {
     rows.push([booking.id, booking.name, booking.phone, booking.date, booking.time, booking.guests, booking.status, booking.notes]);
   });
 
@@ -106,10 +127,11 @@ exportButton.addEventListener("click", () => {
   URL.revokeObjectURL(link.href);
 });
 
-clearButton.addEventListener("click", () => {
-  if (!confirm("Clear all bookings from this browser?")) return;
-  localStorage.removeItem(BOOKINGS_KEY);
+clearButton.addEventListener("click", async () => {
+  if (!confirm("Clear all bookings?")) return;
+  activeSource = await window.EtownBookings.clearBookings();
+  allBookings = [];
   renderBookings();
 });
 
-renderBookings();
+loadBookings();
