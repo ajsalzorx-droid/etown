@@ -12,6 +12,8 @@
   --red: #c62020;
   --green: #ffc313;
   --shadow: 0 24px 70px rgba(0, 0, 0, 0.42);
+  --font-body: "Outfit", Arial, sans-serif;
+  --font-display: "Cinzel", Georgia, serif;
 }
 
 * {
@@ -26,7 +28,7 @@ body {
   margin: 0;
   background: var(--paper);
   color: #fff;
-  font-family: Inter, Arial, sans-serif;
+  font-family: var(--font-body);
   line-height: 1.5;
 }
 
@@ -85,11 +87,18 @@ img {
   text-transform: uppercase;
 }
 
+.brand strong {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
 .site-nav {
   display: flex;
   align-items: center;
   gap: clamp(14px, 3vw, 30px);
   font-size: 0.95rem;
+  font-weight: 700;
 }
 
 .site-nav a {
@@ -178,7 +187,7 @@ img {
   color: var(--gold);
   font-size: 0.78rem;
   font-weight: 800;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
 }
 
@@ -191,20 +200,26 @@ p {
 
 h1 {
   margin-bottom: 18px;
+  font-family: var(--font-display);
   font-size: clamp(2.6rem, 6vw, 5.2rem);
+  font-weight: 800;
   line-height: 0.96;
-  letter-spacing: 0;
+  letter-spacing: 0.015em;
 }
 
 h2 {
   margin-bottom: 16px;
+  font-family: var(--font-display);
   font-size: clamp(2rem, 4vw, 4.2rem);
+  font-weight: 700;
   line-height: 1;
+  letter-spacing: 0.01em;
 }
 
 h3 {
   margin-bottom: 10px;
   font-size: 1.2rem;
+  font-weight: 800;
 }
 
 .hero-copy {
@@ -228,6 +243,7 @@ h3 {
   border-radius: 8px;
   padding: 13px 20px;
   font-weight: 800;
+  letter-spacing: 0.01em;
   text-decoration: none;
   cursor: pointer;
 }
@@ -494,8 +510,10 @@ h3 {
   padding: 11px 14px;
   background: linear-gradient(90deg, var(--gold), #f7a90b);
   color: #080706;
+  font-family: var(--font-body);
   font-size: 1.05rem;
   line-height: 1;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
 }
 
@@ -884,6 +902,7 @@ textarea {
 .booking-table th {
   color: var(--gold);
   font-size: 0.78rem;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
