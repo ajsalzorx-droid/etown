@@ -12,8 +12,8 @@
   --red: #c62020;
   --green: #ffc313;
   --shadow: 0 24px 70px rgba(0, 0, 0, 0.42);
-  --font-body: "Manrope", Arial, sans-serif;
-  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-body: "Plus Jakarta Sans", Arial, sans-serif;
+  --font-display: "Sora", Arial, sans-serif;
 }
 
 * {
@@ -89,9 +89,9 @@ img {
 
 .brand strong {
   font-family: var(--font-display);
-  font-size: 1.35rem;
-  font-weight: 700;
-  letter-spacing: 0.03em;
+  font-size: 1.18rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
 }
 
 .site-nav {
@@ -202,19 +202,19 @@ p {
 h1 {
   margin-bottom: 18px;
   font-family: var(--font-display);
-  font-size: clamp(2.55rem, 5.2vw, 4.55rem);
-  font-weight: 700;
-  line-height: 0.98;
-  letter-spacing: 0.015em;
+  font-size: clamp(2.25rem, 4.4vw, 4rem);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: 0;
 }
 
 h2 {
   margin-bottom: 16px;
   font-family: var(--font-display);
-  font-size: clamp(2.15rem, 4.3vw, 4.45rem);
+  font-size: clamp(2rem, 3.8vw, 3.9rem);
   font-weight: 700;
-  line-height: 0.98;
-  letter-spacing: 0.01em;
+  line-height: 1.04;
+  letter-spacing: 0;
 }
 
 h3 {
@@ -1051,8 +1051,8 @@ textarea {
   }
 
   .hero-content h1 {
-    max-width: 540px;
-    font-size: clamp(2.15rem, 12vw, 3.4rem);
+    max-width: 520px;
+    font-size: clamp(2rem, 10.5vw, 3.15rem);
     line-height: 1.05;
   }
 
