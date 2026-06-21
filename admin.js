@@ -1,3 +1,9 @@
+const ADMIN_PASSWORD = "etown@2026";
+const ADMIN_AUTH_KEY = "etownAdminUnlocked";
+const loginScreen = document.querySelector("[data-admin-login]");
+const loginForm = document.querySelector("[data-admin-login-form]");
+const loginError = document.querySelector("[data-admin-login-error]");
+const adminDashboard = document.querySelector("[data-admin-dashboard]");
 const bookingsTable = document.querySelector("[data-bookings]");
 const emptyState = document.querySelector("[data-empty]");
 const searchInput = document.querySelector("[data-search]");
@@ -8,6 +14,12 @@ const sourceLabel = document.querySelector("[data-source]");
 
 let allBookings = [];
 let activeSource = "Supabase";
+
+const openDashboard = () => {
+  loginScreen.hidden = true;
+  adminDashboard.hidden = false;
+  loadBookings();
+};
 
 const escapeHtml = (value) =>
   String(value || "")
@@ -134,4 +146,20 @@ clearButton.addEventListener("click", async () => {
   renderBookings();
 });
 
-loadBookings();
+loginForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const password = new FormData(loginForm).get("adminPassword");
+
+  if (password !== ADMIN_PASSWORD) {
+    loginError.textContent = "Incorrect password. Please try again.";
+    return;
+  }
+
+  sessionStorage.setItem(ADMIN_AUTH_KEY, "true");
+  loginError.textContent = "";
+  openDashboard();
+});
+
+if (sessionStorage.getItem(ADMIN_AUTH_KEY) === "true") {
+  openDashboard();
+}
