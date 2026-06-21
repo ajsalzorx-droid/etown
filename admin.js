@@ -3,7 +3,6 @@ const ADMIN_AUTH_KEY = "etownAdminUnlocked";
 const loginScreen = document.querySelector("[data-admin-login]");
 const loginForm = document.querySelector("[data-admin-login-form]");
 const loginError = document.querySelector("[data-admin-login-error]");
-const adminHeader = document.querySelector("[data-admin-header]");
 const adminDashboard = document.querySelector("[data-admin-dashboard]");
 const logoutButton = document.querySelector("[data-admin-logout]");
 const bookingsTable = document.querySelector("[data-bookings]");
@@ -19,7 +18,6 @@ let activeSource = "Supabase";
 
 const openDashboard = () => {
   loginScreen.hidden = true;
-  adminHeader.hidden = false;
   adminDashboard.hidden = false;
   loadBookings();
 };
@@ -29,7 +27,6 @@ const closeDashboard = () => {
   loginForm.reset();
   loginError.textContent = "";
   loginScreen.hidden = false;
-  adminHeader.hidden = true;
   adminDashboard.hidden = true;
 };
 

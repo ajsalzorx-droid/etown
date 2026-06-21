@@ -28,20 +28,6 @@
       </form>
     </section>
 
-    <header class="admin-header" data-admin-header hidden>
-      <a class="brand" href="index.html" aria-label="Back to E-TOWN website">
-        <img class="brand-logo" src="assets/etown-logo-web.jpg" alt="E-TOWN Resto Lounge logo" />
-        <span>
-          <strong>E-TOWN</strong>
-          <small>Booking Admin</small>
-        </span>
-      </a>
-      <div class="admin-header-actions">
-        <a class="button secondary" href="index.html">View Website</a>
-        <button class="button dark" type="button" data-admin-logout>Logout</button>
-      </div>
-    </header>
-
     <main class="admin-shell" data-admin-dashboard hidden>
       <section class="admin-hero">
         <div>
@@ -51,8 +37,10 @@
           <p class="admin-source" data-source>Connecting to Supabase...</p>
         </div>
         <div class="admin-actions">
+          <a class="button secondary" href="index.html">View Website</a>
           <button class="button primary" type="button" data-export>Export CSV</button>
           <button class="button dark" type="button" data-clear>Clear All</button>
+          <button class="button dark" type="button" data-admin-logout>Logout</button>
         </div>
       </section>
 

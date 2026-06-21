@@ -708,16 +708,6 @@ textarea {
     var(--paper);
 }
 
-.admin-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 18px;
-  border-bottom: 1px solid var(--line);
-  padding: 18px clamp(18px, 5vw, 64px);
-  background: rgba(5, 5, 5, 0.92);
-}
-
 .admin-shell {
   width: min(1280px, calc(100% - 36px));
   margin: 0 auto;
@@ -862,17 +852,8 @@ textarea {
 }
 
 .admin-login[hidden],
-.admin-header[hidden],
 .admin-shell[hidden] {
   display: none;
-}
-
-.admin-header-actions {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: 10px;
 }
 
 .admin-login-card {
@@ -981,7 +962,6 @@ textarea {
     flex-direction: column;
   }
 
-  .admin-header,
   .admin-hero {
     align-items: flex-start;
     flex-direction: column;
