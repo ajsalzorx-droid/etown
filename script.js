@@ -5,6 +5,7 @@ const formStatus = document.querySelector(".form-status");
 const dateInput = document.querySelector('input[type="date"]');
 const heroSlides = Array.from(document.querySelectorAll(".hero-slide"));
 const heroDots = Array.from(document.querySelectorAll(".hero-dots span"));
+const BOOKINGS_KEY = "etownBookings";
 
 if (dateInput) {
   dateInput.min = new Date().toISOString().slice(0, 10);
@@ -38,7 +39,22 @@ reservationForm?.addEventListener("submit", (event) => {
   event.preventDefault();
   const data = new FormData(reservationForm);
   const name = data.get("name") || "Guest";
-  formStatus.textContent = `Thanks, ${name}. Your booking request is ready to confirm by phone.`;
+  const bookings = JSON.parse(localStorage.getItem(BOOKINGS_KEY) || "[]");
+  const booking = {
+    id: `ET-${Date.now()}`,
+    name: String(name),
+    phone: String(data.get("phone") || ""),
+    date: String(data.get("date") || ""),
+    time: String(data.get("time") || ""),
+    guests: String(data.get("guests") || "1"),
+    notes: String(data.get("notes") || ""),
+    status: "New",
+    createdAt: new Date().toISOString(),
+  };
+
+  bookings.unshift(booking);
+  localStorage.setItem(BOOKINGS_KEY, JSON.stringify(bookings));
+  formStatus.textContent = `Thanks, ${name}. Your booking request has been saved. We will confirm by phone.`;
   reservationForm.reset();
   if (dateInput) {
     dateInput.min = new Date().toISOString().slice(0, 10);

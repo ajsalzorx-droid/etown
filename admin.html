@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E-TOWN Admin | Table Bookings</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="assets/etown-logo-web.jpg" />
+    <link rel="stylesheet" href="styles.css?v=logo-theme" />
+  </head>
+  <body class="admin-body">
+    <header class="admin-header">
+      <a class="brand" href="index.html" aria-label="Back to E-TOWN website">
+        <img class="brand-logo" src="assets/etown-logo-web.jpg" alt="E-TOWN Resto Lounge logo" />
+        <span>
+          <strong>E-TOWN</strong>
+          <small>Booking Admin</small>
+        </span>
+      </a>
+      <a class="button secondary" href="index.html">View Website</a>
+    </header>
+
+    <main class="admin-shell">
+      <section class="admin-hero">
+        <div>
+          <p class="eyebrow">Table Bookings</p>
+          <h1>Admin Dashboard</h1>
+          <p>Manage reservation requests saved from the website booking form.</p>
+        </div>
+        <div class="admin-actions">
+          <button class="button primary" type="button" data-export>Export CSV</button>
+          <button class="button dark" type="button" data-clear>Clear All</button>
+        </div>
+      </section>
+
+      <section class="admin-stats" aria-label="Booking summary">
+        <article>
+          <span>Total</span>
+          <strong data-stat="total">0</strong>
+        </article>
+        <article>
+          <span>New</span>
+          <strong data-stat="new">0</strong>
+        </article>
+        <article>
+          <span>Confirmed</span>
+          <strong data-stat="confirmed">0</strong>
+        </article>
+        <article>
+          <span>Cancelled</span>
+          <strong data-stat="cancelled">0</strong>
+        </article>
+      </section>
+
+      <section class="admin-panel">
+        <div class="admin-toolbar">
+          <label>
+            Search
+            <input type="search" data-search placeholder="Name or phone" />
+          </label>
+          <label>
+            Status
+            <select data-filter>
+              <option value="All">All</option>
+              <option value="New">New</option>
+              <option value="Confirmed">Confirmed</option>
+              <option value="Cancelled">Cancelled</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="booking-table-wrap">
+          <table class="booking-table">
+            <thead>
+              <tr>
+                <th>Guest</th>
+                <th>Phone</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Guests</th>
+                <th>Status</th>
+                <th>Notes</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody data-bookings></tbody>
+          </table>
+          <p class="empty-bookings" data-empty>No bookings yet.</p>
+        </div>
+      </section>
+    </main>
+
+    <script src="admin.js"></script>
+  </body>
+</html>
