@@ -1102,9 +1102,53 @@ textarea {
   }
 }
 
+.scroll-reveal {
+  opacity: 0;
+  filter: blur(8px);
+  transform: translateY(34px) scale(0.98);
+  transition:
+    opacity 720ms ease,
+    filter 720ms ease,
+    transform 720ms ease;
+  will-change: opacity, filter, transform;
+}
+
+.scroll-reveal.is-visible {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0) scale(1);
+}
+
+.menu-category:nth-child(2),
+.gallery-item:nth-child(2),
+.experience-list article:nth-child(2) {
+  transition-delay: 80ms;
+}
+
+.menu-category:nth-child(3),
+.gallery-item:nth-child(3),
+.experience-list article:nth-child(3) {
+  transition-delay: 150ms;
+}
+
+.menu-category:nth-child(4),
+.gallery-item:nth-child(4) {
+  transition-delay: 220ms;
+}
+
+.menu-category:nth-child(5),
+.gallery-item:nth-child(5) {
+  transition-delay: 290ms;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .offer-popup {
+  .offer-popup,
+  .scroll-reveal {
     animation: none;
+    opacity: 1;
+    filter: none;
+    transform: none;
+    transition: none;
   }
 }
 

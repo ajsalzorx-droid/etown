@@ -8,6 +8,11 @@ const heroDots = Array.from(document.querySelectorAll(".hero-dots span"));
 const offerPopup = document.querySelector("[data-offer-popup]");
 const offerPopupClose = document.querySelector("[data-offer-popup-close]");
 const offerPopupKey = "etownOfferPopupClosed";
+const scrollRevealItems = Array.from(
+  document.querySelectorAll(
+    ".offer-section, .section-heading, .menu-category, .split-section > *, .experience-list article, .gallery-item, .visit-panel, .map-card, .reserve-section > *"
+  )
+);
 
 if (dateInput) {
   dateInput.min = new Date().toISOString().slice(0, 10);
@@ -47,6 +52,24 @@ offerPopupClose?.addEventListener("click", () => {
   sessionStorage.setItem(offerPopupKey, "true");
   offerPopup.hidden = true;
 });
+
+if (scrollRevealItems.length && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  scrollRevealItems.forEach((item) => item.classList.add("scroll-reveal"));
+
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        entry.target.classList.toggle("is-visible", entry.isIntersecting);
+      });
+    },
+    {
+      rootMargin: "0px 0px -12% 0px",
+      threshold: 0.16,
+    }
+  );
+
+  scrollRevealItems.forEach((item) => revealObserver.observe(item));
+}
 
 reservationForm?.addEventListener("submit", async (event) => {
   event.preventDefault();
