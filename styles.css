@@ -294,6 +294,59 @@ h3 {
   background: var(--gold);
 }
 
+.offer-popup {
+  position: absolute;
+  right: clamp(18px, 5vw, 70px);
+  bottom: clamp(18px, 6vw, 70px);
+  z-index: 2;
+  width: min(360px, calc(100% - 36px));
+  border: 1px solid rgba(255, 195, 19, 0.55);
+  border-radius: 8px;
+  padding: 22px;
+  background: rgba(5, 5, 5, 0.88);
+  color: #fff;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.48);
+  backdrop-filter: blur(14px);
+}
+
+.offer-popup[hidden] {
+  display: none;
+}
+
+.offer-popup-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 50%;
+  background: transparent;
+  color: #fff;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.offer-popup h2 {
+  max-width: 270px;
+  margin-bottom: 10px;
+  font-size: clamp(1.8rem, 4vw, 2.7rem);
+}
+
+.offer-popup p:not(.eyebrow) {
+  margin-bottom: 18px;
+  color: rgba(255, 255, 255, 0.76);
+}
+
+.offer-popup-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
 .section,
 .offer-section,
 .split-section,
@@ -948,6 +1001,13 @@ textarea {
 
   .hero-content {
     margin: 0 auto;
+  }
+
+  .offer-popup {
+    position: fixed;
+    right: 14px;
+    bottom: 14px;
+    width: calc(100% - 28px);
   }
 
   .hero-facts,

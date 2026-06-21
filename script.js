@@ -5,6 +5,9 @@ const formStatus = document.querySelector(".form-status");
 const dateInput = document.querySelector('input[type="date"]');
 const heroSlides = Array.from(document.querySelectorAll(".hero-slide"));
 const heroDots = Array.from(document.querySelectorAll(".hero-dots span"));
+const offerPopup = document.querySelector("[data-offer-popup]");
+const offerPopupClose = document.querySelector("[data-offer-popup-close]");
+const offerPopupKey = "etownOfferPopupClosed";
 
 if (dateInput) {
   dateInput.min = new Date().toISOString().slice(0, 10);
@@ -33,6 +36,17 @@ if (heroSlides.length > 1 && !window.matchMedia("(prefers-reduced-motion: reduce
     heroDots[activeSlide]?.classList.add("is-active");
   }, 4200);
 }
+
+if (offerPopup && sessionStorage.getItem(offerPopupKey) !== "true") {
+  window.setTimeout(() => {
+    offerPopup.hidden = false;
+  }, 900);
+}
+
+offerPopupClose?.addEventListener("click", () => {
+  sessionStorage.setItem(offerPopupKey, "true");
+  offerPopup.hidden = true;
+});
 
 reservationForm?.addEventListener("submit", async (event) => {
   event.preventDefault();
