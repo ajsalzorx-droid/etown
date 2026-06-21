@@ -191,8 +191,8 @@ p {
 
 h1 {
   margin-bottom: 18px;
-  font-size: clamp(3rem, 9vw, 7.8rem);
-  line-height: 0.9;
+  font-size: clamp(2.6rem, 6vw, 5.2rem);
+  line-height: 0.96;
   letter-spacing: 0;
 }
 
