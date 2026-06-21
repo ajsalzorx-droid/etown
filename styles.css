@@ -12,8 +12,8 @@
   --red: #c62020;
   --green: #ffc313;
   --shadow: 0 24px 70px rgba(0, 0, 0, 0.42);
-  --font-body: "Outfit", Arial, sans-serif;
-  --font-display: "Cinzel", Georgia, serif;
+  --font-body: "Manrope", Arial, sans-serif;
+  --font-display: "Cormorant Garamond", Georgia, serif;
 }
 
 * {
@@ -89,8 +89,9 @@ img {
 
 .brand strong {
   font-family: var(--font-display);
-  font-weight: 800;
-  letter-spacing: 0.02em;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
 }
 
 .site-nav {
@@ -201,18 +202,18 @@ p {
 h1 {
   margin-bottom: 18px;
   font-family: var(--font-display);
-  font-size: clamp(2.35rem, 4.8vw, 4.25rem);
-  font-weight: 800;
-  line-height: 1.04;
-  letter-spacing: 0.01em;
+  font-size: clamp(2.55rem, 5.2vw, 4.55rem);
+  font-weight: 700;
+  line-height: 0.98;
+  letter-spacing: 0.015em;
 }
 
 h2 {
   margin-bottom: 16px;
   font-family: var(--font-display);
-  font-size: clamp(2rem, 4vw, 4.2rem);
+  font-size: clamp(2.15rem, 4.3vw, 4.45rem);
   font-weight: 700;
-  line-height: 1;
+  line-height: 0.98;
   letter-spacing: 0.01em;
 }
 
